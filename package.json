@@ -4,7 +4,7 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "prod": "npm run build && php artisan optimize"
+        "prod": "npm run dev && php artisan optimize"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
