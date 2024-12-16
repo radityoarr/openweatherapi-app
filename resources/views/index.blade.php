@@ -110,10 +110,27 @@
     </div>
 
     <script>
-        // Update background dynamically
-        const weatherApp = document.getElementById('weatherApp');
-        const weatherCondition = "{{ $weather['weather'][0]['main'] ?? '' }}".toLowerCase();
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+    
+            if (!urlParams.has('q') && !urlParams.has('lat') && !urlParams.has('lon')) {
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
 
+                        window.location.href = `?lat=${latitude}&lon=${longitude}`;
+                    }, function (error) {
+                        console.error("Error getting location:", error);
+                    });
+                } else {
+                    console.warn("Geolocation tidak didukung di browser ini.");
+                }
+            }
+        });
+    
+        const weatherCondition = "{{ $weather['weather'][0]['main'] ?? '' }}".toLowerCase();
+    
         switch (weatherCondition) {
             case 'clear':
                 weatherApp.classList.add('bg-gradient-to-br', 'from-yellow-300', 'to-orange-500');
@@ -128,6 +145,7 @@
                 weatherApp.classList.add('bg-gradient-to-br', 'from-blue-400', 'to-indigo-600');
         }
     </script>
+    
 </body>
 
 </html>

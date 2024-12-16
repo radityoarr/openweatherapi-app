@@ -20,7 +20,8 @@ class WeatherController extends Controller
 
         if ($query) {
             $locationParam = ['q' => $query];
-        } elseif ($lat && $lon) {
+        } 
+        elseif ($lat && $lon) {
             $locationParam = ['lat' => $lat, 'lon' => $lon];
         } else {
             $locationParam = ['q' => 'Sukolilo'];
@@ -51,11 +52,10 @@ class WeatherController extends Controller
             $currentTime = \Carbon\Carbon::now('Asia/Jakarta');
             Log::info('Current time (Asia/Jakarta):', ['current_time' => $currentTime]);
         
-            // Filter data forecast agar hanya menampilkan data dari waktu sekarang ke depan
             $forecast['list'] = array_filter($forecast['list'], function ($data) use ($currentTime) {
                 $forecastTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $data['dt_txt'], 'UTC')
                     ->setTimezone('Asia/Jakarta');
-                                    Log::info('Forecast time:', ['forecast_time' => $forecastTime, 'dt_txt' => $data['dt_txt']]);
+                Log::info('Forecast time:', ['forecast_time' => $forecastTime, 'dt_txt' => $data['dt_txt']]);
                 return $forecastTime >= $currentTime;
             });
         

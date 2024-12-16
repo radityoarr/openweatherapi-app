@@ -3,13 +3,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-<<<<<<< HEAD
-        "dev": "vite",     
-        "prod": "npm run build && php artisan optimize"
-=======
-        "dev": "vite",
-        "prod": "npm run build"
->>>>>>> 1859431f79421b89905af2ecd9675e4487ad32cd
+        "dev": "vite"  
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
