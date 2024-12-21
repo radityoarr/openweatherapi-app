@@ -24,7 +24,7 @@ class WeatherController extends Controller
         elseif ($lat && $lon) {
             $locationParam = ['lat' => $lat, 'lon' => $lon];
         } else {
-            $locationParam = ['q' => 'Sukolilo'];
+            $locationParam = ['q' => 'Surabaya'];
         }
         Log::info('Weather API request parameters:', $locationParam);
 
